@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-bg-base: var(--bg-base);
+  --color-bg-card: var(--bg-card);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-accent-main: var(--accent-main);
+  --color-success-main: var(--success-main);
+  --color-warning-main: var(--warning-main);
+}
+
+@layer base {
+  :root {
+    /* Dark mode (default) - terminal aesthetic */
+    --bg-base: #070708;
+    --bg-card: rgba(24, 24, 27, 0.75);
+    --border-subtle: rgba(63, 63, 70, 0.6);
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --accent-main: #ea580c;
+    --success-main: #22c55e;
+    --warning-main: #eab308;
+  }
+
+  html.light {
+    /* Light mode - high contrast, premium */
+    --bg-base: #f0f0f2;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --border-subtle: rgba(0, 0, 0, 0.12);
+    --text-main: #111111;
+    --text-muted: #4b5563;
+    --accent-main: #c2410c;
+    --success-main: #15803d;
+    --warning-main: #b45309;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply min-h-screen font-sans;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Low-specificity link default — Tailwind text-* overrides win */
+  :where(a):not([class]) {
+    color: var(--accent-main);
+    transition: opacity 0.15s ease;
+  }
+  :where(a):not([class]):hover {
+    opacity: 0.8;
+  }
+}
+
+.glass-panel {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  @apply rounded-xl backdrop-blur-md shadow-sm;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Input / select styling */
+input, textarea, select {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-subtle);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/* Focus states */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus-visible {
+  outline: 2px solid var(--accent-main);
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+::selection {
+  background-color: var(--accent-main);
+  color: white;
+}
+
+/* ============================================
+   LIGHT MODE SPECIFIC OVERRIDES
+   ============================================ */
+
+html.light .glass-panel {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06);
+}
+
+/* Chart grid lines - more visible in light mode */
+html.light .recharts-cartesian-grid-horizontal line,
+html.light .recharts-cartesian-grid-vertical line {
+  stroke: #d1d5db;
+  stroke-opacity: 0.8;
+}
+
+/* Chart axes text */
+html.light .recharts-text {
+  fill: #374151 !important;
+}
+
+/* Pie chart segment borders */
+html.light .recharts-pie path {
+  stroke: #f0f0f2;
+  stroke-width: 2;
+}
+
+/* Chart tooltip */
+html.light .recharts-default-tooltip {
+  background: white !important;
+  border: 1px solid #d1d5db !important;
+  color: #111111 !important;
+}
+
+/* Legend text in light mode */
+html.light .recharts-legend-item-text {
+}
+
+html.light .recharts-tooltip-label {
+  color: var(--text-main) !important;
+}
+
+html.light input,
+html.light textarea,
+html.light select {
+  border-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+html.light .glass-panel {
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+html.light .badge {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+html.light .recharts-default-legend {
+  color: var(--text-main) !important;
+}
+
+/* Light mode badge overrides for LeaningPill */
+html.light .badge-sky {
+  color: #0284c7 !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+}
+html.light .badge-zinc {
+  color: #52525b !important;
+  border-color: rgba(82, 82, 91, 0.3) !important;
+}
+html.light .badge-orange {
+  color: #ea580c !important;
+  border-color: rgba(234, 88, 12, 0.3) !important;
+}
+html.light .badge-amber {
+  color: #d97706 !important;
+  border-color: rgba(217, 119, 6, 0.3) !important;
+}
+
+/* Consistency badges in light mode - override Tailwind colors for visibility */
+html.light .text-green-500 { color: #15803d !important; }
+html.light .text-amber-500 { color: #a16207 !important; }
+html.light .text-orange-500 { color: #c2410c !important; }
+html.light .bg-green-500\/10 { background-color: rgba(22, 163, 74, 0.08) !important; }
+html.light .bg-amber-500\/10 { background-color: rgba(202, 138, 4, 0.08) !important; }
+html.light .bg-orange-500\/10 { background-color: rgba(234, 88, 12, 0.08) !important; }
+
+/* StatCard values in light mode */
+html.light .stat-value {
+  color: var(--text-main) !important;
+}
+
+/* Sidebar in light mode */
+html.light .sidebar-navitem {
+  color: var(--text-main) !important;
+}
+html.light aside {
+  border-right-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light .text-sky-400 {
+  color: #0284c7 !important;
+}
+html.light .text-sky-500 {
+  color: #0369a1 !important;
+}
+
+html.light .text-text-main {
+  color: #171717 !important;
+}
+
+html.light h1, html.light h2, html.light h3, html.light .text-text-main {
+  color: #171717 !important;
+}
+
+/* Card hover effects */
+.glass-panel:hover {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+
+/* Code blocks */
+code {
+  background-color: var(--bg-card);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+/* Table styling */
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.5rem;
+}
+
+/* Badge consistency */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
