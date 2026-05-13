@@ -92,7 +92,7 @@ export function ClusterDetailPage() {
             const isGeneric = (n?: string | null) => !n || /^(cluster|politics|topic|news)/i.test(n.trim());
             let t = data.cluster_name;
             if (isGeneric(t)) t = narrative?.topic || data.topic || "";
-            if (isGeneric(t) && data.members.length > 0) t = data.members[0].title.split(" - ")[0].split(" | ")[0].trim();
+            if (isGeneric(t) && (data.members ?? []).length > 0) t = (data.members[0]?.title ?? "").split(" - ")[0].split(" | ")[0].trim();
             if (!t || isGeneric(t)) t = "Major News Event";
             return t;
           })()}
@@ -115,7 +115,7 @@ export function ClusterDetailPage() {
           <p className="text-sm text-text-muted mt-1">How different outlets are framing the same event — note the emphasis, tone, and angle differences.</p>
         </div>
         <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-          {data.members.map((m) => {
+          {(data.members ?? []).map((m) => {
             const s = narrative?.sources?.find(src => src.source_name === m.source_name || src.source_name === m.source);
             const narrativeFocus = s?.narrative_angle || m.framing || 'Straight factual reporting';
             
@@ -159,8 +159,8 @@ export function ClusterDetailPage() {
                   <div className="mt-4 pt-4 border-t border-border-subtle">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-card px-2.5 py-1 text-[10px] font-medium text-text-muted border border-border-subtle">
                       <span className={`h-1.5 w-1.5 rounded-full ${
-                        m.sentiment.toLowerCase().includes('positive') ? 'bg-green-500' :
-                        m.sentiment.toLowerCase().includes('negative') ? 'bg-red-500' : 'bg-amber-500'
+                        m.sentiment?.toLowerCase().includes('positive') ? 'bg-green-500' :
+                        m.sentiment?.toLowerCase().includes('negative') ? 'bg-red-500' : 'bg-amber-500'
                       }`} />
                       {m.sentiment}
                     </span>

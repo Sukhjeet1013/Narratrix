@@ -81,7 +81,7 @@ export function ArticleDetailPage() {
                   {s.title}
                 </Link>
                 <p className="text-xs text-text-muted">
-                  {s.source} · score {s.similarity_score.toFixed(3)}
+                  {s.source} · score {(s.similarity_score ?? 0).toFixed(3)}
                 </p>
               </li>
             ))}

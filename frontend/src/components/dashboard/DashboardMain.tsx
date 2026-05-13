@@ -72,7 +72,7 @@ export function DashboardMain({
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           title="Total articles"
-          value={data.articlesCount.toLocaleString()}
+          value={(data.articlesCount ?? 0).toLocaleString()}
           hint="Ingested + deduplicated"
           icon={Newspaper}
         />
@@ -95,11 +95,11 @@ export function DashboardMain({
             </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {data.detailSamples.slice(0, 6).map((d) => (
+            {(data.detailSamples ?? []).slice(0, 6).map((d) => (
               <ClusterInsightCard key={d.id} detail={d} />
             ))}
           </div>
-          {data.detailSamples.length === 0 ? (
+          {(data.detailSamples ?? []).length === 0 ? (
             <p className="text-sm text-text-muted">No stories identified yet. Check data ingestion.</p>
           ) : null}
         </section>

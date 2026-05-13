@@ -12,8 +12,9 @@ import { CHART_AXIS, CHART_GRID, CHART_TOOLTIP_BG, CHART_TOOLTIP_BORDER } from "
 export type LineDatum = { label: string; similarity: number };
 
 /** Cross-outlet narrative alignment trend across stories. */
-export function SimilarityLineChart({ data }: { data: LineDatum[] }) {
-  if (data.length < 2) {
+export function SimilarityLineChart({ data }: { data: LineDatum[] | undefined }) {
+  const safeData = data ?? [];
+  if (safeData.length < 2) {
     return (
       <p className="py-12 text-center text-sm text-text-muted">
         Need more story samples to plot alignment trend.
@@ -22,7 +23,7 @@ export function SimilarityLineChart({ data }: { data: LineDatum[] }) {
   }
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
+      <LineChart data={safeData} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID} />
         <XAxis
           dataKey="label"

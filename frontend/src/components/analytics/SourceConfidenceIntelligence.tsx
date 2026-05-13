@@ -19,7 +19,7 @@ function getConsistencyLevel(source: Source): "Stable" | "Moderately Variable" |
   }
   // Deterministic hash-based fallback — realistic distribution:
   // buckets 0-9 = Stable (50%), 10-15 = Moderately Variable (30%), 16-19 = Highly Variable (20%)
-  const hash = source.source_name.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const hash = (source.source_name ?? "").split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
   const bucket = hash % 20;
   if (bucket < 10) return "Stable";
   if (bucket < 16) return "Moderately Variable";

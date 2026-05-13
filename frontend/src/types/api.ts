@@ -4,7 +4,7 @@ export interface SimilarArticle {
   article_id: number;
   title: string;
   source: string | null;
-  similarity_score: number;
+  similarity_score: number | null;
 }
 
 export interface Article {
@@ -74,10 +74,10 @@ export interface ClusterDetail extends ClusterSummary {
 export interface Source {
   id: number;
   source_name: string;
-  source_type: string;
-  country: string;
-  language: string;
-  political_leaning: string;
+  source_type: string | null;
+  country: string | null;
+  language: string | null;
+  political_leaning: string | null;
   leaning_confidence: number | null;
   editorial_notes: string | null;
   ownership_group: string | null;

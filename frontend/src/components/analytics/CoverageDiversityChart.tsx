@@ -19,9 +19,9 @@ export function CoverageDiversityChart({ clusters }: CoverageDiversityChartProps
     let sixPlus = 0;
     let singleSource = 0;
 
-    for (const cluster of clusters) {
+    for (const cluster of (clusters ?? [])) {
       const sourceSet = new Set<string>();
-      for (const member of cluster.members) {
+      for (const member of (cluster.members ?? [])) {
         const source = member.source_name || member.source;
         if (source) sourceSet.add(source);
       }
@@ -32,7 +32,7 @@ export function CoverageDiversityChart({ clusters }: CoverageDiversityChartProps
       else sixPlus++;
     }
 
-    const total = clusters.length || 1;
+    const total = (clusters ?? []).length || 1;
     return [
       { name: "Single Source", count: singleSource, percentage: Math.round((singleSource / total) * 100) },
       { name: "2 Outlets", count: twoOutlets, percentage: Math.round((twoOutlets / total) * 100) },

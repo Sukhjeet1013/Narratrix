@@ -77,13 +77,13 @@ export function IngestionStatusWidget() {
         <div>
           <p className="text-[10px] uppercase tracking-wider text-text-muted mb-0.5">New articles</p>
           <p className="text-sm font-semibold tabular-nums text-text-main">
-            {status.last_run_inserted > 0 ? `+${status.last_run_inserted}` : status.total_runs > 0 ? "0" : "—"}
+            {(status.last_run_inserted ?? 0) > 0 ? `+${status.last_run_inserted}` : (status.total_runs ?? 0) > 0 ? "0" : "—"}
           </p>
         </div>
         <div>
           <p className="text-[10px] uppercase tracking-wider text-text-muted mb-0.5">Total fetched</p>
           <p className="text-sm font-semibold tabular-nums text-text-main">
-            {status.total_inserted.toLocaleString()}
+            {(status.total_inserted ?? 0).toLocaleString()}
           </p>
         </div>
       </div>

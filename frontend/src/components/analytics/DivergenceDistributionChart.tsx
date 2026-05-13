@@ -18,8 +18,8 @@ export function DivergenceDistributionChart({ clusters }: DivergenceDistribution
     let mixedFraming = 0;     // <65% — notable framing divergence
     let noData = 0;
 
-    for (const cluster of clusters) {
-      const members = cluster.members.filter(m => m.similarity_to_centroid != null);
+    for (const cluster of (clusters ?? [])) {
+      const members = (cluster.members ?? []).filter(m => m.similarity_to_centroid != null);
       if (members.length === 0) { noData++; continue; }
       const avgSim = members.reduce((acc, m) => acc + (m.similarity_to_centroid || 0), 0) / members.length;
       if (avgSim >= 0.85) highAgreement++;

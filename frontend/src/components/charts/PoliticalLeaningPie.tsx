@@ -3,15 +3,16 @@ import type { LeaningSlice } from "../../types/api";
 import { leaningPieColor } from "../../utils/leaning";
 import { CHART_TOOLTIP_BG, CHART_TOOLTIP_BORDER } from "./chartTheme";
 
-export function PoliticalLeaningPie({ data }: { data: LeaningSlice[] }) {
-  if (!data.length) {
+export function PoliticalLeaningPie({ data }: { data: LeaningSlice[] | undefined }) {
+  const safeData = data ?? [];
+  if (!safeData.length) {
     return <p className="py-12 text-center text-sm text-text-muted">No leaning metadata yet.</p>;
   }
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>
         <Pie
-          data={data}
+          data={safeData}
           cx="50%"
           cy="50%"
           innerRadius={56}
@@ -22,7 +23,7 @@ export function PoliticalLeaningPie({ data }: { data: LeaningSlice[] }) {
           stroke="rgba(24,24,27,0.9)"
           strokeWidth={2}
         >
-          {data.map((entry, i) => (
+          {safeData.map((entry, i) => (
             <Cell key={`cell-${i}`} fill={leaningPieColor(entry.name)} />
           ))}
         </Pie>

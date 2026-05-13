@@ -5,13 +5,13 @@ export interface IngestionStatus {
   currently_running: boolean;
   last_run_at: string | null;
   last_run_seconds_ago: number | null;
-  last_run_inserted: number;
-  last_run_skipped: number;
-  last_run_sources_ok: number;
-  last_run_sources_failed: number;
+  last_run_inserted: number | null;
+  last_run_skipped: number | null;
+  last_run_sources_ok: number | null;
+  last_run_sources_failed: number | null;
   last_cluster_rebuild_at: string | null;
-  total_runs: number;
-  total_inserted: number;
+  total_runs: number | null;
+  total_inserted: number | null;
 }
 
 export async function fetchIngestionStatus(): Promise<IngestionStatus> {
