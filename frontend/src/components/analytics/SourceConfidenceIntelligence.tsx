@@ -118,7 +118,7 @@ export function SourceConfidenceIntelligence({ sources, articleCounts }: SourceC
                   <div className="flex flex-col sm:items-end w-16">
                     <span className="text-[10px] uppercase tracking-wider text-text-muted mb-0.5">Articles</span>
                     <span className="text-sm font-semibold tabular-nums text-text-main leading-tight">
-                      {articleCount > 0 ? articleCount.toLocaleString() : "No data"}
+                      {articleCount > 0 ? Number(articleCount).toLocaleString() : "No data"}
                     </span>
                   </div>
                 )}
@@ -129,4 +129,4 @@ export function SourceConfidenceIntelligence({ sources, articleCounts }: SourceC
       </div>
     </div>
   );
-}
+}

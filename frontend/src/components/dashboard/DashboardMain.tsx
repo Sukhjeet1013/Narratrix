@@ -72,7 +72,7 @@ export function DashboardMain({
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           title="Total articles"
-          value={(data.articlesCount ?? 0).toLocaleString()}
+          value={Number(data.articlesCount ?? 0).toLocaleString()}
           hint="Ingested + deduplicated"
           icon={Newspaper}
         />

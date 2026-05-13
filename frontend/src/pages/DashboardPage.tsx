@@ -77,7 +77,7 @@ export function DashboardPage() {
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           title="Articles"
-          value={(data.articlesCount ?? 0).toLocaleString()}
+          value={Number(data.articlesCount ?? 0).toLocaleString()}
           hint="Total ingested"
           icon={Newspaper}
         />
@@ -131,4 +131,4 @@ export function DashboardPage() {
 
     </div>
   );
-}
+}

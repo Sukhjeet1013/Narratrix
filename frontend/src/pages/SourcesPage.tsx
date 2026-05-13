@@ -132,7 +132,7 @@ export function SourcesPage() {
                 <div className="mt-auto pt-3 border-t border-border-subtle flex items-center gap-3 text-xs text-text-muted">
                   <span className="flex items-center gap-1">
                     <Newspaper className="h-3.5 w-3.5 shrink-0" />
-                    {articleCount > 0 ? `${articleCount.toLocaleString()} articles` : "No data"}
+                    {articleCount > 0 ? `${Number(articleCount).toLocaleString()} articles` : "No data"}
                   </span>
                   <span className="flex items-center gap-1">
                     <span className={`inline-block h-1.5 w-1.5 rounded-full shrink-0 ${r.active ? 'bg-green-500' : 'bg-zinc-400'}`} />
